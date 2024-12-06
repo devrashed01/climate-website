@@ -59,11 +59,11 @@ export default function Page() {
   );
 }
 
-export const Container = styled.div`
+const Container = styled.div`
   padding: 1rem;
   background-color: #f0f2f5;
 `;
 
-export const Header = styled.div`
+const Header = styled.div`
   padding: 1rem;
 `;

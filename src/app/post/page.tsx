@@ -8,7 +8,7 @@ import { App, Button, Row, Table, Typography } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import usePostUtils from "./utils";
 
-export default function Members() {
+export default function Post() {
   const { message } = App.useApp();
   const { columns, form, isPendingDelete, isOpen, setIsOpen } = usePostUtils();
   const { push } = useRouter();
