@@ -1,3 +1,5 @@
+"use client";
+
 import { deletePost } from "@/actions/postActions";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
