@@ -13,7 +13,7 @@ export default function AuthLayoutWrapper({ children }: AuthLayoutProps) {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      router.push("/");
+      router.push("/post");
     }
   }, [router]);
 

@@ -1,7 +1,9 @@
 "use client";
 
+import { getProfile } from "@/actions/profileActions";
 import { AuthContext } from "@/context/AuthContext";
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -11,11 +13,25 @@ const initState = {
   isAuthenticated: false,
   isLoading: true,
   user: null,
-  configuration: null,
 };
 
 export default function AuthProvider({ children }: Props) {
   const [authState, setAuthState] = useState<AuthState>(initState);
+
+  const { data } = useQuery({
+    queryKey: ["profile"],
+    queryFn: getProfile,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setAuthState({
+        isAuthenticated: true,
+        isLoading: false,
+        user: data,
+      });
+    }
+  }, [data]);
 
   const login = (data: User) => {
     setAuthState({
@@ -25,10 +41,12 @@ export default function AuthProvider({ children }: Props) {
     });
   };
 
-  const logout = () => {
+  const logout = (isRedirect: boolean = true) => {
     localStorage.removeItem("token");
     setAuthState(initState);
-    window.location.href = "/login";
+    if (isRedirect) {
+      window.location.href = "/login";
+    }
   };
 
   return (

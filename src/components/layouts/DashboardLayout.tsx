@@ -38,7 +38,7 @@ interface AuthLayoutProps {
 
 export default function DashboardLayout({ children }: AuthLayoutProps) {
   const navigate = useRouter();
-  const { login, logout, authState } = useAuth();
+  const { logout, authState } = useAuth();
   const pathname = usePathname();
 
   const items: MenuItem[] = [
@@ -60,13 +60,6 @@ export default function DashboardLayout({ children }: AuthLayoutProps) {
   });
 
   useEffect(() => {
-    if (data) {
-      login(data);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  useEffect(() => {
     if (isError) {
       localStorage.removeItem("token");
       navigate.push("/login");
@@ -81,6 +74,10 @@ export default function DashboardLayout({ children }: AuthLayoutProps) {
     navigate.push("/");
   }
 
+  if (!authState.isAuthenticated) {
+    return null;
+  }
+
   return (
     <Layout>
       <Header
@@ -92,7 +89,14 @@ export default function DashboardLayout({ children }: AuthLayoutProps) {
           background: "white",
         }}
       >
-        <h1>Climate</h1>
+        <Space>
+          <h1>Climate</h1>
+          <Button size="small" type="primary">
+            <Link href="/" target="_blank">
+              View Website
+            </Link>
+          </Button>
+        </Space>
 
         <Space>
           <Typography.Title level={5}>{authState.user?.name}</Typography.Title>
@@ -101,7 +105,7 @@ export default function DashboardLayout({ children }: AuthLayoutProps) {
             danger
             shape="circle"
             size="large"
-            onClick={logout}
+            onClick={() => logout()}
             icon={<LogoutOutlined />}
           />
         </Space>

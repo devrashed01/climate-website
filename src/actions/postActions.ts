@@ -1,4 +1,4 @@
-import { privateRequest } from "@/config/axios.config";
+import { privateRequest, publicRequest } from "@/config/axios.config";
 
 export const getPosts = (params: Params) =>
   privateRequest
@@ -13,3 +13,6 @@ export const updatePost = (id: string, payload: PostPayload) =>
 
 export const deletePost = (id: string) =>
   privateRequest.delete(`post/delete/${id}`).then((res) => res.data);
+
+export const getAllPosts = () =>
+  publicRequest.get<Post[]>("public/post/list").then((res) => res.data);

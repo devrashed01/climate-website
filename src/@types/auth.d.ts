@@ -17,7 +17,7 @@ interface SignUpPayload {
 interface AuthContextType {
   authState: AuthState;
   login: (user: ProfileResponse) => void;
-  logout: () => void;
+  logout: (isRedirect?: boolean) => void;
 }
 
 interface AuthState {

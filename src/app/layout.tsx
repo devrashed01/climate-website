@@ -43,15 +43,15 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AntdRegistry>
-          <AuthProvider>
-            <ThemeProvider>
-              <StyledComponentsRegistry>
-                <QueryProvider>
+          <QueryProvider>
+            <AuthProvider>
+              <ThemeProvider>
+                <StyledComponentsRegistry>
                   <App>{children}</App>
-                </QueryProvider>
-              </StyledComponentsRegistry>
-            </ThemeProvider>
-          </AuthProvider>
+                </StyledComponentsRegistry>
+              </ThemeProvider>
+            </AuthProvider>
+          </QueryProvider>
         </AntdRegistry>
       </body>
     </html>
