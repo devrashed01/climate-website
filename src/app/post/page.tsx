@@ -1,14 +1,16 @@
 "use client";
 
-import { addPost, getPosts, updatePost } from "@/actions/postActions";
-import DashboardLayout from "@/components/layouts/DashboardLayout";
-import AddPostModal from "@/features/post/AddPostModal";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App, Button, Row, Table, Typography } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
+
+import { addPost, getPosts, updatePost } from "@/actions/postActions";
+import DashboardLayout from "@/components/layouts/DashboardLayout";
+import AddPostModal from "@/features/post/AddPostModal";
+import { Suspense } from "react";
 import usePostUtils from "./utils";
 
-export default function Post() {
+function Posts() {
   const { message } = App.useApp();
   const { columns, form, isPendingDelete, isOpen, setIsOpen } = usePostUtils();
   const { push } = useRouter();
@@ -92,5 +94,15 @@ export default function Post() {
         size="small"
       />
     </DashboardLayout>
+  );
+}
+
+export default function Page() {
+  return (
+    <>
+      <Suspense fallback={<>Loading...</>}>
+        <Posts />
+      </Suspense>
+    </>
   );
 }
