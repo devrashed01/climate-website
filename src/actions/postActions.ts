@@ -16,3 +16,6 @@ export const deletePost = (id: string) =>
 
 export const getAllPosts = () =>
   publicRequest.get<Post[]>("public/post/list").then((res) => res.data);
+
+export const getPublicPostDetails = (id: string) =>
+  publicRequest.get<Post>(`public/post/detail/${id}`).then((res) => res.data);

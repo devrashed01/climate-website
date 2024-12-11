@@ -1,4 +1,6 @@
 import { Button, Col, Form, FormInstance, Input, Modal, Row } from "antd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface Props {
   isOpen: boolean;
@@ -47,7 +49,7 @@ export default function AddPostModal({
               label={"Description"}
               rules={[{ required: true }]}
             >
-              <Input />
+              <ReactQuill theme="snow" />
             </Form.Item>
           </Col>
           <Col span={24}>
@@ -60,7 +62,7 @@ export default function AddPostModal({
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="videoUrl" label={"Video URL"}>
+            <Form.Item name="videoUrl" label={"YTD Video ID"}>
               <Input />
             </Form.Item>
           </Col>

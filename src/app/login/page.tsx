@@ -3,7 +3,7 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useMutation } from "@tanstack/react-query";
 import { App, Button, Form, Input, Row, Typography } from "antd";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { login } from "@/actions/authActions";
 
@@ -12,6 +12,7 @@ const { Title } = Typography;
 export default function Login() {
   const { message } = App.useApp();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: login,
@@ -22,6 +23,11 @@ export default function Login() {
       .then((data) => {
         message.success(data.data.message);
         localStorage.setItem("token", data.data.token);
+        const redirectUrl = searchParams.get("redirectUrl");
+        if (redirectUrl) {
+          window.location.replace(redirectUrl);
+          return;
+        }
         router.push("/post");
       })
       .catch((error: Error) => {

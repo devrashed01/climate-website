@@ -1,7 +1,8 @@
 "use client";
 
 import { deletePost } from "@/actions/postActions";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useCopyToClipboard } from "@/utils";
+import { CopyOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, Form, Image, Popconfirm, Space, TableColumnsType } from "antd";
 import dayjs from "dayjs";
@@ -14,6 +15,7 @@ export default function usePostUtils() {
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
   const [isOpen, setIsOpen] = useState(false);
+  const { copyToClipboard } = useCopyToClipboard();
 
   const { mutate: handlePostDelete, isPending } = useMutation({
     mutationFn: deletePost,
@@ -36,9 +38,22 @@ export default function usePostUtils() {
       key: "title",
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "YTD Video ID",
+      dataIndex: "videoUrl",
+      key: "videoUrl",
+      ellipsis: true,
+      render: (value) => {
+        return (
+          <Space>
+            <Button
+              size="small"
+              onClick={() => copyToClipboard(value)}
+              icon={<CopyOutlined />}
+            />
+            {value}
+          </Space>
+        );
+      },
     },
     {
       title: "Image Url",

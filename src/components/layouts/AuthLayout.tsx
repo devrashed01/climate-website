@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { BloodImageBottom, Center } from "./style";
+import { Center } from "./style";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -17,12 +17,5 @@ export default function AuthLayoutWrapper({ children }: AuthLayoutProps) {
     }
   }, [router]);
 
-  return (
-    <Center>
-      <div>
-        {children}
-        <BloodImageBottom src="/assets/4.png" />
-      </div>
-    </Center>
-  );
+  return <Center>{children}</Center>;
 }
