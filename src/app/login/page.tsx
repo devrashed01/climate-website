@@ -6,10 +6,11 @@ import { App, Button, Form, Input, Row, Typography } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { login } from "@/actions/authActions";
+import { Suspense } from "react";
 
 const { Title } = Typography;
 
-export default function Login() {
+function Login() {
   const { message } = App.useApp();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -87,5 +88,15 @@ export default function Login() {
         </Row>
       </Form>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <>
+      <Suspense fallback={<>Loading...</>}>
+        <Login />
+      </Suspense>
+    </>
   );
 }
