@@ -97,12 +97,10 @@ function Posts() {
   );
 }
 
-export default function Page() {
+export default function AdminPost() {
   return (
-    <>
-      <Suspense fallback={<>Loading...</>}>
-        <Posts />
-      </Suspense>
-    </>
+    <Suspense fallback={<>Loading...</>}>
+      <Posts />
+    </Suspense>
   );
 }

@@ -44,7 +44,7 @@ function Login() {
       }}
     >
       <Title style={{ marginTop: 0 }} level={4}>
-        Climate Admin
+        Climaxy Admin
       </Title>
       <Form
         name="normal_login"

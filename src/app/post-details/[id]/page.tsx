@@ -32,7 +32,11 @@ export default function Page() {
           allowFullScreen
         ></iframe>
       ) : (
-        <Image src={data?.imageUrl} alt="" />
+        <Image
+          src={data?.imageUrl}
+          style={{ height: 400, width: "auto" }}
+          alt=""
+        />
       )}
       <Typography.Title>{data?.title}</Typography.Title>
       <div

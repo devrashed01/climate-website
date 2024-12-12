@@ -18,7 +18,7 @@ export default function PublicLayout({ children }: AuthLayoutProps) {
       <Header>
         <Typography.Title level={4}>
           <Flex justify="space-between">
-            <Link href="/">Climate</Link>
+            <Link href="/">Climaxy</Link>
             {authState.isAuthenticated && (
               <Space>
                 {authState?.user?.email}
